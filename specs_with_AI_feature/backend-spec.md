@@ -26,7 +26,7 @@ Request flow: client → router (auth dependency validates JWT) → service (bus
 
 ## 3. Data Model
 <!-- Entities and relationships. One table per entity: fields, types, constraints. e.g. User, Trip, Destination, ItineraryItem. -->
-Entities mirror the glossary in `goal-spec.md`: User, Trip, Day, Activity. (`Destination` and `Itinerary` are not separate tables — Destination is a field on Trip, and Itinerary is just "a Trip's Days and Activities".)
+Entities mirror the glossary in `goal-spec.md`: User, Trip, Day, Activity. (`Destination` and `Itinerary` are not separate tables — Destination is a field on Trip, and Itinerary is just "a Trip's Days and Activities".) The AI reference-knowledge tables (`knowledge_entries`, `knowledge_keywords`) are separate, read-only application data described in §11.
 
 ### Entity: `User`
 | Field | Type | Constraints | Notes |
@@ -74,9 +74,8 @@ Entities mirror the glossary in `goal-spec.md`: User, Trip, Day, Activity. (`Des
 
 ## 4. Business Logic & Rules
 <!-- Validation rules, computed fields, ordering logic, edge cases (e.g. overlapping dates, empty trips). -->
-- **Trip creation:** `end_date` must be ≥ `start_date`, and the trip may be at most 60 days long, inclusive (400 if either fails — caps a mistyped year from creating hundreds of Days). On success, the service computes N = (`end_date` − `start_date`).days + 1 and creates N `Day` rows (`day_number` 1..N, `date` = `start_date` + offset) in the same transaction as the Trip — the client never creates/deletes Days directly.
+- **Trip creation:** `end_date` must be ≥ `start_date` (400 if not). On success, the service computes N = (`end_date` − `start_date`).days + 1 and creates N `Day` rows (`day_number` 1..N, `date` = `start_date` + offset) in the same transaction as the Trip — the client never creates/deletes Days directly.
 - **Activity text:** required, trimmed, rejects empty/whitespace-only strings (400).
-- **Activity order:** a new Activity gets `sort_order` = (highest `sort_order` in its Day) + 1, or `0` if the Day is empty. Editing text never changes it; deleting leaves gaps (no renumbering). No reorder endpoint (§10).
 - **Ownership:** every Trip/Day/Activity operation checks the resource belongs to the authenticated user (`Trip.user_id == current_user.id`, transitively for its Days/Activities). A resource that exists but belongs to another user returns `404` (not `403`) to avoid confirming it exists.
 - **No overlapping-trip validation:** a user may have multiple trips with overlapping dates — out of scope per `goal-spec.md`.
 - **No auto-suggested activities/plans:** explicitly out of scope per `goal-spec.md`.
@@ -85,7 +84,7 @@ Entities mirror the glossary in `goal-spec.md`: User, Trip, Day, Activity. (`Des
 <!-- Auth strategy (JWT/session/OAuth), password handling, role/permission model, who can access/modify what. -->
 - **Strategy:** JWT bearer tokens, matching the frontend's `Authorization: Bearer <token>` expectation (`frontend-spec.md` §5/§8).
 - **Login:** `POST /auth/login` verifies username + password (bcrypt) and returns a signed JWT (`JWT_SECRET`, expiry 30 days — no refresh-token flow for MVP; re-login once it expires).
-- **Signup:** `POST /auth/signup` creates a new account (username + bcrypt-hashed password) and returns a token in the same shape as login, so the client is immediately logged in. Signup validation is minimal: `username` trimmed and non-empty, `password` at least 8 characters (`422` otherwise); login applies no format rules. `username` must be unique (`400` if taken, consistent with other business-rule validation — no `403`/`409` in this API's status-code set, see §8). This is basic username/password signup only — email-based auth/password reset is still deferred to post-MVP per `goal-spec.md`.
+- **Signup:** `POST /auth/signup` creates a new account (username + bcrypt-hashed password) and returns a token in the same shape as login, so the client is immediately logged in. `username` must be unique (`400` if taken, consistent with other business-rule validation — no `403`/`409` in this API's status-code set, see §8). This is basic username/password signup only — email-based auth/password reset is still deferred to post-MVP per `goal-spec.md`.
 - **Authorization:** application data and AI routes require a valid JWT; `/auth/login`, `/auth/signup`, and the infrastructure health check are public. Protected routes use a FastAPI authentication dependency; the authenticated `user_id` scopes all Trip/Day/Activity queries. No roles/permission tiers — a user can only ever see/modify their own data.
 - An expired/invalid/missing token returns `401`.
 ## 6. Third-Party Integrations
@@ -94,7 +93,7 @@ Entities mirror the glossary in `goal-spec.md`: User, Trip, Day, Activity. (`Des
 
 ## 7. Non-Functional Requirements
 <!-- Performance/scalability targets, rate limiting, caching strategy, logging/monitoring, expected load. -->
-- Expected load: a single user or a small handful of personal accounts (open username/password signup, but personal-scale usage) — no performance/scalability targets beyond "feels instant" for this scale, even though the AWS setup has headroom to scale further later.
+- Expected load: a single user or a small handful of personal accounts (MVP, no public signup) — no performance/scalability targets beyond "feels instant" for this scale, even though the AWS setup has headroom to scale further later.
 - Existing CRUD rate limiting remains out of scope. The proposed AI endpoint has separate request limits because calls incur provider usage; see §11.
 - Caching: none — Postgres queries at this scale don't need a cache layer.
 - Logging: Uvicorn's default access/error logs are sufficient; no external monitoring/APM for MVP.
@@ -103,10 +102,10 @@ Entities mirror the glossary in `goal-spec.md`: User, Trip, Day, Activity. (`Des
 <!-- Standard error response shape, how validation errors vs. server errors vs. auth errors are surfaced. (Should match api-contract-spec.md) -->
 - Uses FastAPI's default conventions: `HTTPException` → `{"detail": "<message>"}`; Pydantic validation failures → `422` with FastAPI's standard `detail` array of field errors.
 - Status codes: `400` business-rule validation (e.g. `end_date` before `start_date`, empty activity text), `401` missing/invalid/expired JWT, `404` resource not found or not owned by the caller, `422` request-shape validation, `500` unhandled error.
-- The binding error shape and full status-code set (including the AI endpoint's `429`/`502`/`503`/`504`, see §11) are defined in `api-contract-spec.md` §3 and §6; this section must stay consistent with them.
+- This is the MVP default — **must be finalized to match `api-contract-spec.md`** once that spec is filled in, since the exact response envelope is the frontend/backend contract.
 ## 9. Environment & Deployment
 <!-- Env vars, config management, deployment target, migrations strategy. -->
-- **Env vars/secrets:** `DATABASE_URL` (RDS connection string), `JWT_SECRET`, `JWT_EXPIRY_MINUTES` (`43200` = 30 days; the API reports the same lifetime in **seconds** as `expires_in`), `ALLOWED_ORIGINS` (comma-separated, for CORS). Stored as ECS task definition secrets sourced from AWS Secrets Manager (not plain environment variables) for `DATABASE_URL`/`JWT_SECRET`; non-secret config (`ALLOWED_ORIGINS`, `JWT_EXPIRY_MINUTES`) as plain task-definition env vars.
+- **Env vars/secrets:** `DATABASE_URL` (RDS connection string), `JWT_SECRET`, `JWT_EXPIRY_MINUTES`, `ALLOWED_ORIGINS` (comma-separated, for CORS). Stored as ECS task definition secrets sourced from AWS Secrets Manager (not plain environment variables) for `DATABASE_URL`/`JWT_SECRET`; non-secret config (`ALLOWED_ORIGINS`, `JWT_EXPIRY_MINUTES`) as plain task-definition env vars.
 - **Migrations:** Alembic; run as a one-off ECS task (`alembic upgrade head`) triggered by the deploy pipeline before the new app version receives traffic.
 - **Seeding:** none needed — accounts are created via `POST /auth/signup` (§5).
 
@@ -138,7 +137,7 @@ On push to `main`:
 1. **Test:** install deps, run backend test suite + lint.
 2. **Build:** build the Docker image, tag with the commit SHA.
 3. **Push:** push the image to ECR (auth via GitHub OIDC → the IAM deploy role, no static AWS keys as GitHub secrets).
-4. **Migrate:** run the Alembic migration as a one-off ECS task against RDS.
+4. **Migrate:** run the Alembic migration, then reload the AI reference knowledge (`python -m scripts.load_knowledge`), as a one-off ECS task against RDS.
 5. **Deploy:** update the ECS service/task definition to the new image tag and wait for the rollout to stabilize.
 
 - **CORS:** `CORSMiddleware` configured from `ALLOWED_ORIGINS`, including both the Vercel production domain and its `*.vercel.app` preview domains — Preview deployments hit this same production API (`frontend-spec.md` §10).
@@ -154,7 +153,7 @@ Anthropic and `claude-haiku-4-5-20251001` are selected; specified operational de
 
 ## 11. Conversational AI Integration — Approved Specification
 
-Architecture approved: extend the existing FastAPI deployment with `POST /api/v1/ai/trip-draft`. The model runs at a hosted provider, not inside ECS. See `AI-spec.md` for conversational rules and `api-contract-spec.md` for binding request/response shapes and error mapping. No database migration or changes to trip creation/day generation are required.
+Architecture approved: extend the existing FastAPI deployment with `POST /api/v1/ai/trip-draft`. The model runs at a hosted provider, not inside ECS. See `AI-spec.md` for conversational rules and `api-contract-spec.md` for binding request/response shapes and error mapping. Trip creation and day generation are unchanged; the only schema addition is the reference-knowledge store below.
 
 ### Components & Request Flow
 
@@ -174,6 +173,16 @@ Store the API key in Secrets Manager and inject it into the ECS task using the e
 Enforce the request bounds in the API contract. Approved initial rate limit: 10 AI requests per authenticated user per 60 seconds, returning `429` with `Retry-After`. An in-memory limiter is per process and resets on restart; it is only an MVP throttle, not a global spending cap. Review shared enforcement before scaling replicas/workers. The approved Anthropic usage budget is US$5 per month for Musafir, across users and backend instances. Configure and verify spending enforcement before enabling production AI; do not claim the request throttle enforces this budget. If provider controls cannot enforce this amount and scope, document an alternative before release. When the budget blocks AI calls, return `503` using the existing unavailable/quota behavior and preserve manual trip creation.
 
 Allow one provider attempt per request, with a 20-second deadline and SDK automatic retries disabled. Limit each provider response to 1,024 output tokens for the entire structured result, including the conversational reply. Treat a response truncated by the output limit as invalid provider output (`502`); preserve the frontend draft and do not automatically retry. Map failures to `502`/`503`/`504` per the contract; do not expose provider error bodies. Record latency, outcome, and usage counts when available, but do not log raw conversations, prompts, credentials, or auth headers. Raw provider response logging is disabled. Anthropic’s standard API data-handling and retention policy is approved; zero data retention is not required. Verify the applicable policy and account settings before production use; this does not relax the application’s logging and credential-handling restrictions.
+
+### Reference Knowledge (RAG) — Approved
+
+Behavior is defined in `AI-spec.md` §4 (Reference Knowledge). Implementation:
+
+- **Extension:** PostgreSQL `pg_trgm`, created by the Alembic migration (`CREATE EXTENSION IF NOT EXISTS pg_trgm`; a trusted extension, available on RDS PostgreSQL). No embeddings provider, API key, or pgvector.
+- **Tables:** `knowledge_entries` (`id`, `kind` = `holiday`/`destination`/`phrase`, `title`, `content`, nullable `year`, `source`) and `knowledge_keywords` (`id`, `entry_id` → cascade delete, lowercase `keyword`).
+- **Data:** curated JSON in `backend/app/knowledge/`. Holiday weekdays and weekend/long-weekend notes are computed by the loader, so data files carry only verified dates and their source. `python -m scripts.load_knowledge` replaces the whole store in one transaction (idempotent); it runs after migrations in Docker Compose and the deploy migration task.
+- **Search:** `app/services/knowledge_service.py` matches keywords against all user messages in the request using `strict_word_similarity(keyword, text) >= 0.6` (tolerates misspellings, respects word boundaries). Holidays are limited to years written by the user, otherwise the reference year and the next. Up to 6 notes, 500 ms statement timeout, run off the event loop.
+- **Prompt:** notes form a third system block after the date context, capped at 4,000 characters. Retrieval errors are logged without content and drafting continues without notes. Only the note count is logged.
 
 ### Verification
 

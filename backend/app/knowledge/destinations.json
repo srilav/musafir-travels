@@ -1,0 +1,140 @@
+{
+ "_comment": "Alternative names and spellings. Keywords list only the alternatives (the canonical name alone needs no note). Notes help recognise a place; the assistant must keep the destination exactly as the user wrote it.",
+ "destinations": [
+  {
+   "name": "Mumbai",
+   "keywords": [
+    "bombay",
+    "bambai"
+   ]
+  },
+  {
+   "name": "Bengaluru",
+   "keywords": [
+    "bangalore",
+    "blr"
+   ]
+  },
+  {
+   "name": "Chennai",
+   "keywords": [
+    "madras"
+   ]
+  },
+  {
+   "name": "Kolkata",
+   "keywords": [
+    "calcutta"
+   ]
+  },
+  {
+   "name": "Delhi",
+   "keywords": [
+    "dilli",
+    "new delhi"
+   ]
+  },
+  {
+   "name": "Puducherry",
+   "keywords": [
+    "pondicherry",
+    "pondy"
+   ]
+  },
+  {
+   "name": "Gurugram",
+   "keywords": [
+    "gurgaon"
+   ]
+  },
+  {
+   "name": "Thiruvananthapuram",
+   "keywords": [
+    "trivandrum"
+   ]
+  },
+  {
+   "name": "Kochi",
+   "keywords": [
+    "cochin"
+   ]
+  },
+  {
+   "name": "Varanasi",
+   "keywords": [
+    "banaras",
+    "benares",
+    "benaras",
+    "kashi"
+   ]
+  },
+  {
+   "name": "Mysuru",
+   "keywords": [
+    "mysore"
+   ]
+  },
+  {
+   "name": "Pune",
+   "keywords": [
+    "poona"
+   ]
+  },
+  {
+   "name": "Vadodara",
+   "keywords": [
+    "baroda"
+   ]
+  },
+  {
+   "name": "Ooty",
+   "keywords": [
+    "udhagamandalam",
+    "ootacamund"
+   ]
+  },
+  {
+   "name": "Shimla",
+   "keywords": [
+    "simla"
+   ]
+  },
+  {
+   "name": "Prayagraj",
+   "keywords": [
+    "allahabad"
+   ]
+  },
+  {
+   "name": "Kodaikanal",
+   "keywords": [
+    "kodai"
+   ]
+  },
+  {
+   "name": "Mahabaleshwar",
+   "keywords": [
+    "mahabs"
+   ]
+  },
+  {
+   "name": "Mangaluru",
+   "keywords": [
+    "mangalore"
+   ]
+  },
+  {
+   "name": "Visakhapatnam",
+   "keywords": [
+    "vizag"
+   ]
+  },
+  {
+   "name": "Leh",
+   "keywords": [
+    "ladakh",
+    "leh ladakh"
+   ]
+  }
+ ]
+}

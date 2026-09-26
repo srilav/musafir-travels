@@ -1,0 +1,24 @@
+# Copy to terraform.tfvars (git-ignored) and fill in.
+
+aws_region = "us-east-1"
+
+# CORS: Vercel production domain + preview domains (comma-separated).
+# A '*' matches one DNS label, so https://*.vercel.app covers preview deploys.
+allowed_origins = "https://musafir-travels.vercel.app,https://*.vercel.app"
+
+# EXACT sub claim from a decoded GitHub OIDC token (see README.md). GitHub may
+# embed numeric IDs: repo:OWNER@<owner_id>/REPO@<repo_id>:ref:refs/heads/main
+github_oidc_sub = "repo:OWNER@0000000/REPO@00000000:ref:refs/heads/main"
+
+# Set false if the account already has the token.actions.githubusercontent.com provider.
+create_github_oidc_provider = true
+
+# Persistent, externally managed secrets (see README.md bootstrap).
+db_master_password_secret_name = "musafir/db-master-password-persistent"
+ai_api_key_secret_name         = "musafir/anthropic-api-key-persistent"
+
+# Keep false until the AI activation checklist in README.md is complete.
+ai_enabled = false
+
+# Leave empty for a fresh DB; infra/scripts/restore.sh passes this for you.
+# restore_from_snapshot = ""

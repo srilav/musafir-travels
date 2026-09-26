@@ -1,0 +1,28 @@
+# Terraform local state / working dirs
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+crash.log
+crash.*.log
+
+# Variable files may contain environment-specific values
+*.tfvars
+*.tfvars.json
+!terraform.tfvars.example
+
+# Saved plans
+*.tfplan
+*.plan
+tfplan
+plan.out
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+.terraform.tfstate.lock.info
+.terraformrc
+terraform.rc

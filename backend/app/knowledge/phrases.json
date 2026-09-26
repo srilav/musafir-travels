@@ -1,0 +1,159 @@
+{
+ "_comment": "Hinglish phrase meanings. Must stay consistent with AI-spec.md section 4 (ask when ambiguous; days vs nights; no couple from head count).",
+ "phrases": [
+  {
+   "title": "kal",
+   "keywords": [
+    "kal"
+   ],
+   "content": "'kal' can mean yesterday or tomorrow. Unless the context makes it clear, ask which date the user means."
+  },
+  {
+   "title": "parso",
+   "keywords": [
+    "parso",
+    "parson",
+    "parsoon"
+   ],
+   "content": "'parso' can mean the day before yesterday or the day after tomorrow. Unless the context makes it clear, ask which date the user means."
+  },
+  {
+   "title": "aaj",
+   "keywords": [
+    "aaj",
+    "aaj se"
+   ],
+   "content": "'aaj' means today (the reference date)."
+  },
+  {
+   "title": "agle hafte",
+   "keywords": [
+    "agle hafte",
+    "agle week",
+    "next week"
+   ],
+   "content": "'agle hafte' / 'next week' names a week, not exact dates. Ask for the exact start and end dates."
+  },
+  {
+   "title": "is hafte",
+   "keywords": [
+    "is hafte",
+    "iss hafte",
+    "is week"
+   ],
+   "content": "'is hafte' means this week; it does not give exact dates. Ask for the exact start and end dates."
+  },
+  {
+   "title": "agle mahine",
+   "keywords": [
+    "agle mahine",
+    "agle month",
+    "next month"
+   ],
+   "content": "'agle mahine' / 'next month' names a month, not exact dates. Ask for the exact dates."
+  },
+  {
+   "title": "din (days)",
+   "keywords": [
+    "do din",
+    "teen din",
+    "char din",
+    "paanch din",
+    "din ke liye"
+   ],
+   "content": "'N din' means N days including the start day: end = start + N - 1 (do=2, teen=3, char=4, paanch=5)."
+  },
+  {
+   "title": "raat (nights)",
+   "keywords": [
+    "do raat",
+    "teen raat",
+    "char raat",
+    "raat ke liye"
+   ],
+   "content": "'N raat' means N nights: end = start + N days (do=2, teen=3, char=4)."
+  },
+  {
+   "title": "ek hafta",
+   "keywords": [
+    "ek hafta",
+    "ek hafte",
+    "one week",
+    "hafte bhar"
+   ],
+   "content": "'ek hafta' (one week) means 7 days including the start day: end = start + 6 days. Ask if the user may mean 7 nights."
+  },
+  {
+   "title": "akele",
+   "keywords": [
+    "akele",
+    "akela",
+    "akeli",
+    "khud",
+    "by myself"
+   ],
+   "content": "'akele' / 'akela' / 'akeli' means alone: trip_type solo."
+  },
+  {
+   "title": "family",
+   "keywords": [
+    "ghar wale",
+    "ghar walon",
+    "gharwalon",
+    "gharwale",
+    "bacchon",
+    "bachcho",
+    "bacche",
+    "mummy papa",
+    "maa papa",
+    "parivar",
+    "parents"
+   ],
+   "content": "Travelling with family members, children or parents ('ghar wale', 'bacchon ke saath', 'mummy papa') means trip_type family."
+  },
+  {
+   "title": "couple",
+   "keywords": [
+    "biwi",
+    "patni",
+    "pati",
+    "wife",
+    "husband",
+    "girlfriend",
+    "boyfriend"
+   ],
+   "content": "Travelling with a spouse or partner ('biwi', 'patni', 'pati', girlfriend, boyfriend) means trip_type couple."
+  },
+  {
+   "title": "friends",
+   "keywords": [
+    "dosto",
+    "doston",
+    "dost",
+    "yaar log",
+    "dostoon"
+   ],
+   "content": "Travelling with friends ('dosto ke saath', 'yaar log') means trip_type group_of_friends."
+  },
+  {
+   "title": "hum dono",
+   "keywords": [
+    "hum dono",
+    "hum do",
+    "two people",
+    "do log"
+   ],
+   "content": "'hum dono' / 'do log' means two people but does NOT establish couple. Ask who is travelling."
+  },
+  {
+   "title": "chhutti",
+   "keywords": [
+    "chhutti",
+    "chhuttiyan",
+    "chutti",
+    "chuttiyan"
+   ],
+   "content": "'chhutti' means holiday or leave. If a festival is named, use its REFERENCE NOTES date; otherwise ask for exact dates."
+  }
+ ]
+}

@@ -1,0 +1,568 @@
+{
+ "_comment": "Verified holiday dates. Lunar/moon-sighting dates must be re-verified against the DoPT list before adding a year. Weekdays and weekend notes are computed by app/services/knowledge_loader.py.",
+ "holidays": [
+  {
+   "name": "Diwali (Deepavali)",
+   "keywords": [
+    "diwali",
+    "deepavali",
+    "deepawali",
+    "divali",
+    "dipawali"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-11-08"
+   ],
+   "tentative": false,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Diwali (Deepavali)",
+   "keywords": [
+    "diwali",
+    "deepavali",
+    "deepawali",
+    "divali",
+    "dipawali"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-10-29"
+   ],
+   "tentative": false,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Holi",
+   "keywords": [
+    "holi",
+    "dhulandi",
+    "dhulivandan",
+    "rangwali holi"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-03-04"
+   ],
+   "tentative": false,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Holi",
+   "keywords": [
+    "holi",
+    "dhulandi",
+    "dhulivandan",
+    "rangwali holi"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-03-23"
+   ],
+   "tentative": false,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Dussehra (Vijayadashami)",
+   "keywords": [
+    "dussehra",
+    "dasara",
+    "dashera",
+    "dusshera",
+    "vijayadashami",
+    "vijaya dashami"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-10-20"
+   ],
+   "tentative": false,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Dussehra (Vijayadashami)",
+   "keywords": [
+    "dussehra",
+    "dasara",
+    "dashera",
+    "dusshera",
+    "vijayadashami",
+    "vijaya dashami"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-10-09"
+   ],
+   "tentative": false,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Id-ul-Fitr (Eid)",
+   "keywords": [
+    "eid",
+    "eid ul fitr",
+    "id ul fitr",
+    "ramzan eid",
+    "ramadan eid",
+    "meethi eid"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-03-21"
+   ],
+   "tentative": true,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Id-ul-Fitr (Eid)",
+   "keywords": [
+    "eid",
+    "eid ul fitr",
+    "id ul fitr",
+    "ramzan eid",
+    "ramadan eid",
+    "meethi eid"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-03-10"
+   ],
+   "tentative": true,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Id-ul-Zuha (Bakrid)",
+   "keywords": [
+    "bakrid",
+    "bakri eid",
+    "eid ul adha",
+    "eid al adha",
+    "id ul zuha"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-05-27",
+    "2026-05-28"
+   ],
+   "tentative": true,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Id-ul-Zuha (Bakrid)",
+   "keywords": [
+    "bakrid",
+    "bakri eid",
+    "eid ul adha",
+    "eid al adha",
+    "id ul zuha"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-05-17"
+   ],
+   "tentative": true,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Muharram",
+   "keywords": [
+    "muharram"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-06-26"
+   ],
+   "tentative": true,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Muharram",
+   "keywords": [
+    "muharram"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-06-16"
+   ],
+   "tentative": true,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Milad-un-Nabi",
+   "keywords": [
+    "milad un nabi",
+    "eid e milad",
+    "id e milad"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-08-26"
+   ],
+   "tentative": true,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Milad-un-Nabi",
+   "keywords": [
+    "milad un nabi",
+    "eid e milad",
+    "id e milad"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-08-15"
+   ],
+   "tentative": true,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Janmashtami",
+   "keywords": [
+    "janmashtami",
+    "krishna janmashtami",
+    "gokulashtami",
+    "janmashtmi"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-09-04"
+   ],
+   "tentative": false,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Janmashtami",
+   "keywords": [
+    "janmashtami",
+    "krishna janmashtami",
+    "gokulashtami",
+    "janmashtmi"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-08-25"
+   ],
+   "tentative": false,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Ram Navami",
+   "keywords": [
+    "ram navami",
+    "rama navami",
+    "ramnavami"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-03-26"
+   ],
+   "tentative": false,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Ram Navami",
+   "keywords": [
+    "ram navami",
+    "rama navami",
+    "ramnavami"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-04-15"
+   ],
+   "tentative": false,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Mahavir Jayanti",
+   "keywords": [
+    "mahavir jayanti"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-03-31"
+   ],
+   "tentative": false,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Mahavir Jayanti",
+   "keywords": [
+    "mahavir jayanti"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-04-19"
+   ],
+   "tentative": false,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Good Friday",
+   "keywords": [
+    "good friday",
+    "easter weekend",
+    "easter"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-04-03"
+   ],
+   "tentative": false,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Good Friday",
+   "keywords": [
+    "good friday",
+    "easter weekend",
+    "easter"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-03-26"
+   ],
+   "tentative": false,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Buddha Purnima",
+   "keywords": [
+    "buddha purnima",
+    "budh purnima",
+    "budha purnima"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-05-01"
+   ],
+   "tentative": false,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Buddha Purnima",
+   "keywords": [
+    "buddha purnima",
+    "budh purnima",
+    "budha purnima"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-05-20"
+   ],
+   "tentative": false,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Guru Nanak Jayanti",
+   "keywords": [
+    "guru nanak jayanti",
+    "gurpurab",
+    "guru purab",
+    "guru nanak birthday"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-11-24"
+   ],
+   "tentative": false,
+   "source": "Government of India gazetted holidays 2026 (DoPT list, via https://govtcalendar.org/govt-calendar-2026/ and https://www.sakshipost.com/news/national/2026-central-government-holiday-list-released-check-here-474963)"
+  },
+  {
+   "name": "Guru Nanak Jayanti",
+   "keywords": [
+    "guru nanak jayanti",
+    "gurpurab",
+    "guru purab",
+    "guru nanak birthday"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-11-14"
+   ],
+   "tentative": false,
+   "source": "DoPT O.M. dated 16 July 2026, gazetted holidays 2027 (via https://www.staffnews.in/2026/07/list-of-holidays-for-the-year-2027-gazetted.html)"
+  },
+  {
+   "name": "Republic Day",
+   "keywords": [
+    "republic day"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-01-26"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "Republic Day",
+   "keywords": [
+    "republic day"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-01-26"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "Dr. B.R. Ambedkar Jayanti",
+   "keywords": [
+    "ambedkar jayanti"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-04-14"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "Dr. B.R. Ambedkar Jayanti",
+   "keywords": [
+    "ambedkar jayanti"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-04-14"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "Independence Day",
+   "keywords": [
+    "independence day"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-08-15"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "Independence Day",
+   "keywords": [
+    "independence day"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-08-15"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "Gandhi Jayanti",
+   "keywords": [
+    "gandhi jayanti"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-10-02"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "Gandhi Jayanti",
+   "keywords": [
+    "gandhi jayanti"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-10-02"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "Christmas",
+   "keywords": [
+    "christmas",
+    "xmas",
+    "christmas day"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-12-25"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "Christmas",
+   "keywords": [
+    "christmas",
+    "xmas",
+    "christmas day"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-12-25"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "New Year's Eve",
+   "keywords": [
+    "new year",
+    "new years eve",
+    "new year eve",
+    "nye"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-12-31"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "New Year's Eve",
+   "keywords": [
+    "new year",
+    "new years eve",
+    "new year eve",
+    "nye"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-12-31"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "New Year's Day",
+   "keywords": [
+    "new year",
+    "new years day"
+   ],
+   "year": 2026,
+   "dates": [
+    "2026-01-01"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  },
+  {
+   "name": "New Year's Day",
+   "keywords": [
+    "new year",
+    "new years day"
+   ],
+   "year": 2027,
+   "dates": [
+    "2027-01-01"
+   ],
+   "tentative": false,
+   "source": "Fixed calendar date"
+  }
+ ]
+}
