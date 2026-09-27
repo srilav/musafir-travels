@@ -1,0 +1,34 @@
+# TEMPORARY. Prints the OIDC `sub` claim GitHub issues for this repository so it
+# can be pasted into infra/terraform.tfvars as `github_oidc_sub`.
+# Delete this workflow once the value is recorded (infra/README.md §1d).
+name: OIDC debug (temporary)
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  claims:
+    name: Print OIDC claims
+    runs-on: ubuntu-latest
+    steps:
+      - name: Decode the identity token's claims
+        run: |
+          set -euo pipefail
+          TOKEN=$(curl -sS \
+            -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | jq -r .value)
+
+          # Decode only the payload. The token itself is a short-lived
+          # credential and is never printed.
+          PAYLOAD=$(printf '%s' "$TOKEN" | cut -d. -f2 | tr '_-' '/+')
+          case $(( ${#PAYLOAD} % 4 )) in
+            2) PAYLOAD="${PAYLOAD}==" ;;
+            3) PAYLOAD="${PAYLOAD}=" ;;
+          esac
+
+          echo "Copy the sub value into terraform.tfvars as github_oidc_sub:"
+          printf '%s' "$PAYLOAD" | base64 -d | jq '{sub, repository, ref}'

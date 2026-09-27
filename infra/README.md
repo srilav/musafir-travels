@@ -208,3 +208,73 @@ picks up the new task-definition revision (with `AI_API_KEY`).
 
 To turn AI off again: `ai_enabled = false`, apply, deploy. The persistent key secret
 is untouched by Terraform in either direction.
+
+---
+
+## 5. Coming back to this: what to expect
+
+Verified end to end on a fresh AWS account (2026-09-27): bootstrap → `init` →
+`plan` → `apply` → `destroy` → full cleanup. Roughly 40 minutes of stack uptime
+cost **7 cents**.
+
+### Before you start
+
+- **`aws configure` region must be a real region** (`us-east-1`), not `global`.
+  A region of `global` builds the endpoint `https://sts.global.amazonaws.com/`,
+  which does not resolve — the error looks like a network fault, not a typo.
+- **`export AWS_PAGER=""`** for the session. CLI v2 pipes output through a pager,
+  so a long-running script stops at `(END)` waiting for a keypress.
+- `terraform.tfvars` is git-ignored, so a fresh clone has none. Copy the example
+  and fill in `allowed_origins` and `github_oidc_sub`; both are required and
+  neither has a default, so `plan` stops immediately without them.
+- Section 1's bootstrap (state bucket, lock table, DB password secret) must
+  exist first. `rds.tf` reads the password through a data source, so `plan`
+  fails on a missing secret before it reaches any resource.
+
+### During the run
+
+| What you'll see | Meaning |
+|---|---|
+| `dynamodb_table is deprecated. Use use_lockfile` on `init` | Harmless; the lock still works. |
+| `plan` reports **41 to add, 0 to change, 0 to destroy** | Correct for an empty account. |
+| `apply` takes 20-30 min | RDS ~10 min; CloudFront 15-20 min (create *and* delete). |
+| ECS service sits at **0/1 running** | Correct: ECR is empty until the first `deploy.yml` run. |
+| curl to the ALB **times out** from your laptop | Correct: the ALB's security group admits only CloudFront's IP ranges. Without CloudFront there is no ingress path at all. |
+
+### Known first-run blockers
+
+- **CloudFront on a new account returns `AccessDenied: Your account must be
+  verified before you can add new CloudFront resources`.** Everything else
+  applies normally (40 of 41 resources); only the distribution fails. Open an
+  AWS Support case quoting the error and its request ID. Once cleared, re-run
+  `terraform apply` — it adds the distribution alone.
+- **If an apply fails partway, do not re-run it and do not delete
+  `errored.tfstate` if one appears.** Terraform writes that file when it cannot
+  persist state to S3; push it back with `terraform state push errored.tfstate`
+  before anything else, or the next apply will try to recreate live resources.
+- **`tfplan` holds the DB password and JWT secret in plaintext.** It is
+  git-ignored; delete it once the apply succeeds.
+
+### Tearing down
+
+`scripts/destroy.sh` snapshots RDS, verifies the snapshot reached `available`,
+and only then destroys — it refuses to delete anything if the backup fails.
+A bare `terraform destroy` **skips the snapshot entirely** (`skip_final_snapshot
+= true`), so it is only safe while the database holds nothing you want.
+
+The snapshot, the state bucket, the lock table and the persistent secrets all
+survive a destroy by design. When you are finished with the project for good,
+`scripts/clean-bootstrap.sh` removes that layer too:
+
+```bash
+BUCKET=<your-state-bucket> infra/scripts/clean-bootstrap.sh
+```
+
+It refuses to run while any RDS instance exists, empties the versioned state
+bucket (plain `aws s3 rm` leaves old versions behind, and the bucket will not
+delete), and force-deletes the secrets with no recovery window. Of those, only
+Secrets Manager bills meaningfully — **$0.40 per secret per month**; the bucket
+and the idle lock table are effectively free.
+
+Afterwards, `infra/.terraform/` is ~870 MB of provider plugins and can be
+deleted; `.terraform.lock.hcl` is committed and should be kept.
